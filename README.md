@@ -1,4 +1,4 @@
-Algo Trading System with Google Sheet + Angel One API
+# Algo Trading System with Google Sheet + Angel One API
 
 This repository is designed for building a fully automated Algo Trading system using:
 - **Google Sheets** as the control center
@@ -21,4 +21,22 @@ This repository is designed for building a fully automated Algo Trading system u
 - GitHub Actions (for auto-running the script from cloud)
 
 ## Folder Structure
- Shreealgo
+
+main.py                 -> Main Python script sheet_config.json       -> Google Sheet config .env / creds.json       -> API keys (ignored by Git) .gitignore              -> Protects secrets README.md               -> This file
+
+## Setup Guide
+
+1. Clone this repo
+2. Setup `.env` file with Angel One & Sheet API keys
+3. Edit `sheet_config.json` with your Google Sheet ID
+4. Run `main.py` or set GitHub Actions for automation
+
+## Note
+
+- Do not share your `.env` or credentials publicly
+- Keep your `.gitignore` updated for safety
+
+## Author
+
+Created with love by [Your Name]  
+Maintained with blessings from Bhagwan & Algo Passion
