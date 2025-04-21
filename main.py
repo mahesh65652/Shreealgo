@@ -1,17 +1,21 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
-scope = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-]
+# Define the scope
+scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
 
-credentials = Credentials.from_service_account_file("credentials.json", scopes=scope)
-client = gspread.authorize(credentials)
+# Load credentials from JSON key file
+creds = Credentials.from_service_account_file("credentials.json", scopes=scope)
 
-sheet = client.open("Your Sheet Name").sheet1
+# Authorize the client
+client = gspread.authorize(creds)
 
+# Open the Google Sheet by name
+sheet = client.open("Google_sheet").sheet1
 
+# Get all data from the sheet
+data = sheet.get_all_values()
 
-
-
+# Print the data
+for row in data:
+    print(row)
