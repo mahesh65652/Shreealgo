@@ -1,16 +1,18 @@
-name: Run Algo Trading Bot
+# Main algo trading logic
+print('Algo Mandir Live')
+name: Run Algo Mandir
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
-  schedule:
-    - cron: '*/15 * * * *'  # हर 15 मिनट में रन करेगा
 
 jobs:
-  run-bot:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up Python
@@ -18,8 +20,6 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Run main script
+    - name: Run main.py
       run: python main.py
+
