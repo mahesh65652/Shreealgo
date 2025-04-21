@@ -2,3 +2,31 @@ __pycache__/
 *.pyc
 .env
 config.py
+
+Environment
+.env
+*.env
+
+# Jupyter Notebooks Checkpoints (if any)
+.ipynb_checkpoints/
+
+# Token and Credentials
+creds.json
+token.pickle
+*.pickle
+
+# VSCode/IDE configs
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# GitHub Actions Secrets/Builds
+*.secrets
+*.key
+*.creds/*.json
