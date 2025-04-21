@@ -1,6 +1,8 @@
-pandas
 gspread
 oauth2client
-smartapi
+pandas
+requests
+smartapi-python
+
 
 
