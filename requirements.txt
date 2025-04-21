@@ -1,4 +1,5 @@
 pandas
 gspread
 oauth2client
-smartapi-python
+smartapi
+
