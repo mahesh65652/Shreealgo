@@ -10,9 +10,6 @@ def main():
     now = datetime.datetime.now()
     print("Current date and time is:", now)
 
-if __name__ == "__main__":
-    main()
-
 
 
 
