@@ -1,2 +1,2 @@
-# Main algo trading logic
+ Main algo trading logic
 print('Algo Mandir Live')
