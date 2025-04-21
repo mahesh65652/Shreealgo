@@ -1,10 +1,15 @@
-import datetime
-print("Algo system started successfully!")
-print("Current date and time is:", datetime.datetime.now())
+import gspread
+from google.oauth2.service_account import Credentials
 
-import datetime
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets",
+         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
 
-def main():
-    print("Algo system started successfully!")
-    now = datetime.datetime.now()
-    print("Current date and time is:", now)
+creds = Credentials.from_service_account_file("credentials.json", scopes=scope)
+client = gspread.authorize(creds)
+
+sheet = client.open_by_url("YOUR_SHEET_URL").sheet1
+
+# Example: read value
+value = sheet.cell(1, 1).value
+print("Cell A1:", value)
+
