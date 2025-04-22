@@ -39,4 +39,4 @@ main.py                 -> Main Python script sheet_config.json       -> Google 
 ## Author
 
 Created with love by [Your Name]  
-Maintained with blessings from Bhagwan & Algo Passion 
+Maintained with blessings from Bhagwan & Algo Passion
