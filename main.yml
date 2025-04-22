@@ -1,4 +1,3 @@
-name: Run Algo Mandir
 
 on:
   push:
@@ -12,6 +11,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        path: Shreealgo
+
+    - name: Create credentials.json from secret
+      run: |
+        echo "${{ secrets.GOOGLE_CREDENTIALS }}" > Shreealgo/credentials.json
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -19,7 +24,11 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        cd Shreealgo
+        pip install -r requirements.txt
 
-    - name: Run main.py
-      run: python main.py 
+    - name: Run main script
+      run: |
+        cd Shreealgo
+        python main.py
