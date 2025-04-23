@@ -1,10 +1,11 @@
+
 import datetime
 import gspread
-from google.oauth2.service_account import Credentials
+from oauth2client.service_account import ServiceAccountCredentials
 
 # Google Sheets setup
-scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
-creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 client = gspread.authorize(creds)
 
 sheet = client.open_by_url('https://docs.google.com/spreadsheets/d/101_7UazH6bodfjSUY5LvweNetaq6T9UuBrp1isn4E1k/edit').sheet1
