@@ -1,0 +1,29 @@
+import os
+import base64
+import json
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Step 1: Decode base64 secret
+gcp_b64 = os.environ.get("GPC_B64")
+decoded_json = base64.b64decode(gcp_b64).decode("utf-8")
+creds_dict = json.loads(decoded_json)
+
+# Step 2: Save to a temporary file
+with open("temp_creds.json", "w") as f:
+    json.dump(creds_dict, f)
+
+# Step 3: Authorize with gspread
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
+credentials = ServiceAccountCredentials.from_json_keyfile_name("temp_creds.json", scope)
+gc = gspread.authorize(credentials)
+
+# Step 4: Access your sheet (update with your sheet URL)
+sheet = gc.open_by_url("https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID").sheet1
+
+# Print sheet data
+data = sheet.get_all_values()
+print(data)
