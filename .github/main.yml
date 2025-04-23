@@ -1,11 +1,3 @@
-
-name: Run Algo Trading Script
-
-on:
-  schedule:
-    - cron: '*/15 3-9 * * 1-5'
-  workflow_dispatch:
-
 jobs:
   run-script:
     runs-on: ubuntu-latest
@@ -24,5 +16,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Create credentials.json
+        run: echo "${{ secrets.GCP_CREDENTIALS_JSON }}" > credentials.json
+
       - name: Run Script
         run: python main.py
+
