@@ -1,39 +1,33 @@
-name: Run Algo Sheet Bot
+name: Auto Run Algo Trading
 
 on:
   workflow_dispatch:
-    inputs:
-      TOTP:
-        description: 'Enter today\'s TOTP'
-        required: true
+  schedule:
+    - cron: "*/15 * * * *"  # Every 15 minutes
 
 jobs:
-  run-algo:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Create .env file
-      run: |
-        echo "API_KEY=${{ secrets.API_KEY }}" >> .env
-        echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
-        echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-        echo "REDIRECT_URL=${{ secrets.REDIRECT_URL }}" >> .env
-        echo "GDRIVE_JSON=${{ secrets.Api_key_json }}" >> .env
-        echo "TOTP=${{ github.event.inputs.TOTP }}" >> .env
+      - name: Decode .env file
+        run: |
+          echo "${{ secrets.ENV_FILE_B64 }}" | base64 -d > .env
 
-    - name: Run Python script
-      run: python main.py
+      - name: Run main.py
+        run: python main.py
+
 
