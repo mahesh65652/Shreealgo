@@ -1,0 +1,34 @@
+name: Run Algo Sheet Script
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:         # Manual trigger support
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Create .env file from GitHub Secret
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Create Google API creds.json from GitHub Secret
+        run: |
+          echo '${{ secrets.API_KEY_JSON }}' > creds.json
+
+      - name: Run Python Script
+        run: python main.py
