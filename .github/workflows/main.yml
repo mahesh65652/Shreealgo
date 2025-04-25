@@ -2,7 +2,7 @@ name: Run Algo Trading Script
 
 on:
   schedule:
-    - cron: '*/30 3-9 * * 1-5'
+    - cron: '*/15 3-9 * * 1-5'
   workflow_dispatch:
 
 jobs:
