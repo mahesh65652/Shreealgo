@@ -1,4 +1,4 @@
-# Algo Trading System with Google Sheet + Angel One API
+ # Algo Trading System with Google Sheet + Angel One API
 
 This repository is designed for building a fully automated Algo Trading system using:
 - **Google Sheets** as the control center
