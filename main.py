@@ -13,9 +13,13 @@ client = gspread.authorize(creds)
 # Open the Google Sheet by name
 sheet = client.open("Google_sheet").sheet1
 
-# Get all data from the sheet
-data = sheet.get_all_values()
+# Example 1: Update A1 Cell
+sheet.update('A1', 'Hello World')
 
-# Print the data
-for row in data:
-    print(row)
+# Example 2: Update B1 Cell
+sheet.update('B1', 'Testing Update')
+
+# Example 3: Update multiple cells at once
+sheet.update('A2:B2', [['Buy', 'Sell']])
+
+print("Sheet Updated Successfully!")
