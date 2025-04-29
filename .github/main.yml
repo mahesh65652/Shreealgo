@@ -1,7 +1,9 @@
-name: Run MCX Bot
+name: Run Algo Bot
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'  # हर 15 मिनट में चलेगा
 
 jobs:
   build:
@@ -18,10 +20,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install gspread google-auth
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run Python script
-        env:
-          GOOGLE_SHEET_JSON: ${{ secrets.GOOGLE_SHEET_JSON }}
-        run: python Shreealgo/main.py
+      - name: Create credentials.json for Google Sheets
+        run: |
+          echo "${{ secrets.GOOGLE_SHEET_CREDS }}" > credentials.json
 
+      - name: Set Angel One ENV variables
+        run: |
+          echo "ANGEL_API_KEY=${{ secrets.ANGEL_API_KEY }}" >> $GITHUB_ENV
+          echo "CLIENT_CODE=${{ secrets.CLIENT_CODE }}" >> $GITHUB_ENV
+          echo "CLIENT_PASSWORD=${{ secrets.CLIENT_PASSWORD }}" >> $GITHUB_ENV
+          echo "TOTP_SECRET=${{ secrets.TOTP_SECRET }}" >> $GITHUB_ENV
+          echo "PIN=${{ secrets.PIN }}" >> $GITHUB_ENV
+
+      - name: Run script
+        run: python main.py
